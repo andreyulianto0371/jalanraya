@@ -1,0 +1,39 @@
+backend:
+  name: git-gateway
+  branch: main # Sesuaikan dengan branch repositori Anda
+  squash_merges: true
+publish_mode: simple
+media_folder: "content/articles/{slug}" # Gambar disimpan di direktori artikel
+public_folder: "/articles/{slug}" # Jalur publik untuk gambar
+
+collections:
+  - name: "articles" # Nama koleksi
+    label: "Articles" # Label koleksi
+    folder: "content/articles" # Folder utama untuk artikel
+    create: true # Mengizinkan pembuatan artikel baru
+    slug: "{{slug}}" # Template untuk slug
+    format: "toml" # Format frontmatter TOML
+    fields:
+      # Common-Defined params
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Menu", name: "menu", widget: "select", options: ["main", "side", "footer"], required: false }
+
+      # Theme-Defined params
+      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+      - { label: "Lead", name: "lead", widget: "string", required: false }
+      - { label: "Comments", name: "comments", widget: "boolean", default: false }
+      - { label: "Author Box", name: "authorbox", widget: "boolean", default: true }
+      - { label: "Pager", name: "pager", widget: "boolean", default: true }
+      - { label: "Table of Contents", name: "toc", widget: "boolean", default: true }
+      - { label: "MathJax", name: "mathjax", widget: "boolean", default: true }
+      - { label: "Sidebar Position", name: "sidebar", widget: "select", options: ["right", "left", "none"], default: "right" }
+      - label: "Widgets"
+        name: "widgets"
+        widget: "list"
+        required: false
+        field:
+          { label: "Widget Name", name: "widget", widget: "select", options: ["search", "recent", "taglist"] }
